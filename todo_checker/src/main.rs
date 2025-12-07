@@ -31,6 +31,14 @@ fn check_and_report_status(task: &Task) {
     }
 }
 
+fn find_task_simlating(id: u32) -> Result<String, String> {
+    if id % 2 == 0 {
+        Ok(format!("Find task ID:{}", id))
+    } else {
+        Err(format!("Error: Task ID:{} not found", id))
+    }
+}
+
 fn main() {
     let task1 = Task {
         id: 1,
@@ -55,11 +63,25 @@ fn main() {
         title: String::from("Old task"),
         status: TaskStatus::Cancelled,
     };
-
+    
     check_and_report_status(&task1);
     check_and_report_status(&task2);
     check_and_report_status(&task3);
     check_and_report_status(&task4);
     
+
+    // エラー検出のシュミレーション
+    let test_id_1 = 20;
+    let test_id_2 = 21;
+
+    match find_task_simlating(test_id_1) {
+        Ok(msg) => println!("Succes to search: {}", msg),
+        Err(err) => println!("Failed to serach: {}", err),
+    }
+    
+    // expectでの動作確認
+    let result_msg = find_task_simlating(test_id_2)
+        .expect("Failed to find the task!");
+
     println!("\nAll tasks processed.");
 }
