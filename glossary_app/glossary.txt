@@ -1,0 +1,3 @@
+Ownership:Memory management rule
+Borrowing:Accessing data with &
+Result:Type for error handling
